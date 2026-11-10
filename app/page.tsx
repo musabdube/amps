@@ -9,8 +9,6 @@ import Footer from "@/components/Footer";
 import {
   ArrowRight,
   ArrowUpRight,
-  Menu,
-  X,
   CheckCircle2,
   Building2,
   Calculator,
@@ -18,17 +16,9 @@ import {
   Wallet,
   TrendingUp,
   Ruler,
-  HardHat,
   Lightbulb,
-  BriefcaseBusiness,
   ShieldCheck,
   Target,
-  Handshake,
-  MoveUpRight,
-  ChevronRight,
-  Mail,
-  MapPin,
-  Phone,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -426,28 +416,16 @@ export default function Home() {
               {[...affiliations, ...affiliations].map((affiliation, index) => (
                 <div
                   key={`${affiliation.name}-${index}`}
-                  className="flex min-h-[180px] min-w-[250px] items-center justify-center rounded-[24px] border border-[#18344A]/10 bg-[#F9F8F5] p-5 md:min-w-[320px]"
+                  className="flex min-h-[120px] min-w-[180px] items-center justify-center p-2 md:min-w-[220px]"
                 >
-                  <div className="flex w-full flex-col items-center justify-center text-center">
-                    <div className="relative flex h-20 w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-4 shadow-sm ring-1 ring-[#18344A]/5">
-                      <Image
-                        src={affiliation.image}
-                        alt={affiliation.name}
-                        width={200}
-                        height={80}
-                        unoptimized
-                        className="max-h-[72px] w-auto object-contain"
-                      />
-                    </div>
-
-                    <div className="mt-5 text-lg font-black uppercase tracking-[0.08em] text-[#18344A] md:text-[1.3rem]">
-                      {affiliation.name}
-                    </div>
-
-                    <div className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#18344A]/60 md:text-[11px]">
-                      {affiliation.subtitle}
-                    </div>
-                  </div>
+                  <Image
+                    src={affiliation.image}
+                    alt={affiliation.name}
+                    width={200}
+                    height={80}
+                    unoptimized
+                    className="max-h-[72px] w-auto object-contain opacity-100"
+                  />
                 </div>
               ))}
             </div>
