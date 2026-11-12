@@ -45,9 +45,9 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Visit Our Office",
-      detail: "Unit G10, Century Square, Heron Crescent, Century City, 7441",
+      detail: "Unit G09, The Courtyard, 1 West Park, Century City, Cape Town, 7441",
       action: "Get Directions",
-      href: "https://www.google.com/maps/search/?api=1&query=Unit+G10+Century+Square+Heron+Crescent+Century+City+7441",
+      href: "https://maps.app.goo.gl/qAKKjRv6EJd3KbRt6",
     },
     {
       icon: Phone,
@@ -273,7 +273,7 @@ export default function ContactPage() {
             </span>
             <h2 className="mt-5 text-3xl font-bold">Visit our office.</h2>
             <p className="mt-5 leading-8 text-white/65">
-              Find us at Century Square in Century City, Cape Town. We welcome enquiries from both
+              Find us at The Courtyard in Century City, Cape Town. We welcome enquiries from both
               the public and private sectors.
             </p>
 
@@ -283,9 +283,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold">Office Address</h3>
                   <p className="mt-2 text-sm leading-7 text-white/65">
-                    Unit G10, Century Square,
+                    Unit G09, The Courtyard,
                     <br />
-                    Heron Crescent, Century City,
+                    1 West Park, Century City,
                     <br />
                     Cape Town, 7441
                   </p>
@@ -315,7 +315,7 @@ export default function ContactPage() {
             </div>
 
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Unit+G10+Century+Square+Heron+Crescent+Century+City+7441"
+              href="https://maps.app.goo.gl/qAKKjRv6EJd3KbRt6"
               target="_blank"
               rel="noreferrer"
               className="mt-auto flex items-center justify-center gap-3 border border-white/25 px-6 py-4 text-sm font-semibold transition hover:border-[#F28C28] hover:bg-[#F28C28]"
