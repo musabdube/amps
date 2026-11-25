@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { FaLinkedin } from "react-icons/fa";
+import { FaUserTie, FaBriefcase, FaLinkedin } from "react-icons/fa";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -13,7 +12,7 @@ const team = [
     qualification: "B.Sc (QS) PrQS PMAQS",
     location: "Cape Town",
     category: "Leadership",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+    icon: FaUserTie,
     initials: "HM",
   },
   {
@@ -22,7 +21,7 @@ const team = [
     qualification: "B.Sc (QS) PrQS PMAQS",
     location: "Cape Town",
     category: "Leadership",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
+    icon: FaUserTie,
     initials: "AP",
   },
   {
@@ -31,7 +30,7 @@ const team = [
     qualification: "B.Sc (QS) PrQS PMAQS",
     location: "Cape Town",
     category: "Leadership",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    icon: FaUserTie,
     initials: "ZS",
   },
   {
@@ -39,7 +38,7 @@ const team = [
     title: "Senior Quantity Surveyor",
     location: "Johannesburg",
     category: "Staff",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
+    icon: FaBriefcase,
     initials: "SJ",
   },
   {
@@ -47,7 +46,7 @@ const team = [
     title: "Cost Consultant",
     location: "Durban",
     category: "Staff",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    icon: FaBriefcase,
     initials: "MC",
   },
   {
@@ -55,7 +54,7 @@ const team = [
     title: "Project Manager",
     location: "Cape Town",
     category: "Staff",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
+    icon: FaBriefcase,
     initials: "EW",
   },
 ];
@@ -77,7 +76,6 @@ export default function TeamPage() {
     <main className="bg-[#f7f1ea] text-[#1d2a33]">
       <Header overlay />
 
-      {/* Brown Section */}
       <section className="relative bg-[#8b7355] py-6 lg:py-8">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl">
@@ -88,7 +86,6 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Hero Section */}
       <section className="relative px-6 pb-8 pt-24 lg:px-12 lg:pb-10 lg:pt-28">
         <div className="mx-auto max-w-[1240px]">
           <div className="mb-8 flex items-center gap-4">
@@ -112,7 +109,6 @@ export default function TeamPage() {
 
       <section className="px-6 pb-16 pt-8 lg:px-12 lg:pb-24">
         <div className="mx-auto max-w-[1240px]">
-          {/* Filter Tabs */}
           <div className="mb-12 flex flex-wrap items-center justify-between gap-4">
             <div className="flex flex-wrap gap-3">
               {categories.map((category) => (
@@ -134,43 +130,35 @@ export default function TeamPage() {
             </span>
           </div>
 
-          {/* Team Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {filteredTeam.map((member) => (
-              <article
-                key={member.name}
-                className="flex flex-col items-center text-center"
-              >
-                {/* Avatar */}
-                <div className="relative mb-4 h-28 w-28 flex-shrink-0 overflow-hidden rounded-full bg-[#e8ddd2]">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    sizes="112px"
-                    className="object-cover"
-                  />
-                </div>
+            {filteredTeam.map((member) => {
+              const Icon = member.icon;
 
-                {/* Info */}
-                <div>
-                  <h3 className="text-sm font-bold tracking-[-0.02em] text-[#1d2a33]">
-                    {member.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-[#5f6871]">{member.title}</p>
-                  {member.qualification && (
-                    <p className="mt-0.5 text-xs text-[#6f8aa3]">{member.qualification}</p>
-                  )}
-                  <a
-                    href="#"
-                    aria-label={`${member.name} LinkedIn`}
-                    className="mt-3 inline-flex items-center justify-center rounded-full border border-[#dfeaf4] bg-white px-3 py-2 text-xs text-[#1d2a33] transition hover:border-[#d9773a] hover:text-[#d9773a]"
-                  >
-                    <FaLinkedin size={14} />
-                  </a>
-                </div>
-              </article>
-            ))}
+              return (
+                <article key={member.name} className="flex flex-col items-center text-center">
+                  <div className="mb-4 flex h-28 w-28 items-center justify-center rounded-full bg-[#e8ddd2] text-[#1d2a33] shadow-sm">
+                    <Icon size={42} className="text-[#1d2a33]" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-bold tracking-[-0.02em] text-[#1d2a33]">
+                      {member.name}
+                    </h3>
+                    <p className="mt-1 text-xs text-[#5f6871]">{member.title}</p>
+                    {member.qualification && (
+                      <p className="mt-0.5 text-xs text-[#6f8aa3]">{member.qualification}</p>
+                    )}
+                    <a
+                      href="#"
+                      aria-label={`${member.name} LinkedIn`}
+                      className="mt-3 inline-flex items-center justify-center rounded-full border border-[#dfeaf4] bg-white px-3 py-2 text-xs text-[#1d2a33] transition hover:border-[#d9773a] hover:text-[#d9773a]"
+                    >
+                      <FaLinkedin size={14} />
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           {filteredTeam.length === 0 && (
