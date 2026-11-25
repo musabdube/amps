@@ -5,12 +5,14 @@ export type PortfolioCategory = {
   description: string;
   image: string;
   services: string[];
+  sector?: string;
 };
 
 export const projects: PortfolioCategory[] = [
   {
     slug: "office-developments",
     title: "Office Developments",
+    sector: "Commercial",
     shortDescription:
       "Commercial office environments and workplace developments.",
     description:
@@ -28,6 +30,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "clinic-developments",
     title: "Clinic Developments",
+    sector: "Healthcare",
     shortDescription:
       "Healthcare and clinic development environments.",
     description:
@@ -45,6 +48,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "shopping-centres",
     title: "Shopping Centres",
+    sector: "Retail",
     shortDescription:
       "Retail destinations and shopping centre developments.",
     description:
@@ -62,6 +66,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "public-sector",
     title: "Public Sector",
+    sector: "Public Sector",
     shortDescription:
       "Projects serving public institutions and communities.",
     description:
@@ -79,6 +84,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "schools",
     title: "Schools",
+    sector: "Education",
     shortDescription:
       "Educational facilities and learning environments.",
     description:
@@ -96,6 +102,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "hotels-and-restaurants",
     title: "Hotels & Restaurants",
+    sector: "Hospitality",
     shortDescription:
       "Hospitality environments and accommodation developments.",
     description:
@@ -113,6 +120,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "warehouse-developments",
     title: "Warehouse Developments",
+    sector: "Industrial",
     shortDescription:
       "Industrial, storage and warehouse facilities.",
     description:
@@ -130,6 +138,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "airports",
     title: "Airports",
+    sector: "Infrastructure",
     shortDescription:
       "Airport facilities and aviation-related infrastructure.",
     description:
@@ -147,6 +156,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "residential-developments",
     title: "Residential Developments",
+    sector: "Residential",
     shortDescription:
       "Residential buildings and housing developments.",
     description:
@@ -164,6 +174,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "retail-stores",
     title: "Retail Stores",
+    sector: "Retail",
     shortDescription:
       "Retail spaces and store developments.",
     description:
@@ -181,6 +192,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "theatres",
     title: "Theatres",
+    sector: "Entertainment",
     shortDescription:
       "Performance venues and theatre developments.",
     description:
@@ -198,6 +210,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "universities-and-technikons",
     title: "Universities & Technikons",
+    sector: "Education",
     shortDescription:
       "Higher education campuses and institutional facilities.",
     description:
@@ -215,6 +228,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "sustainable-technologies",
     title: "Sustainable Technologies",
+    sector: "Sustainability",
     shortDescription:
       "Developments involving sustainable technology and environmental considerations.",
     description:
@@ -232,6 +246,7 @@ export const projects: PortfolioCategory[] = [
   {
     slug: "other-projects",
     title: "Other Projects",
+    sector: "Other",
     shortDescription:
       "A range of additional project types and specialist requirements.",
     description:

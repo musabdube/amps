@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CursorBubble from "@/components/CursorBubble";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -255,15 +256,30 @@ function ScrambleValue({ target }: { target: string }) {
   );
 }
 
-export default function Home() {
-  const [currentYear, setCurrentYear] = useState<number | null>(null);
+function TypewriterText({ target, className }: { target: string; className?: string }) {
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+    let index = 0;
+    const timer = window.setInterval(() => {
+      index += 1;
+      setValue(target.slice(0, index));
 
+      if (index >= target.length) {
+        window.clearInterval(timer);
+      }
+    }, 75);
+
+    return () => window.clearInterval(timer);
+  }, [target]);
+
+  return <span className={className}>{value}</span>;
+}
+
+export default function Home() {
   return (
     <main className="overflow-hidden bg-[#fffdf9] text-[#2d241f]">
+      <CursorBubble />
       <Header overlay />
 
       {/* HERO SECTION */}
@@ -288,48 +304,19 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="max-w-4xl"
+            className="max-w-5xl"
           >
             <div className="mb-6 flex items-center gap-4 sm:mb-8">
               <span className="h-[2px] w-12 bg-[#d9773a]" />
-              <span className="text-[10px] font-bold tracking-[0.18em] text-[#f2c57a] sm:text-xs sm:tracking-[0.25em]">
-                QUANTITY SURVEYORS & COST CONSULTANTS
+              <span className="text-[18px] font-bold tracking-[0.18em] text-[#f2c57a] sm:text-[22px] sm:tracking-[0.25em]">
+                <TypewriterText target="QUANTITY SURVEYORS & COST CONSULTANTS" />
               </span>
             </div>
 
             <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[82px]">
-              Smart Cost
-              <br />
-              <span className="text-[#f3b567]">Management.</span>
+              &nbsp;
             </h1>
-
-            <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-white/80 sm:mt-8 sm:text-lg sm:leading-8 md:text-2xl">
-              Expertise. Integrity. Value.
-            </p>
           </motion.div>
-
-          <div className="mt-14 grid max-w-3xl grid-cols-1 gap-8 border-t border-white/20 pt-8 sm:mt-24 sm:grid-cols-3">
-            {[
-              { value: "2007", label: "Established" },
-              { value: "86+", label: "Combined years of leadership experience" },
-              { value: "01", label: "Level 1 B-BBEE contributor*" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="text-3xl font-extrabold text-white">
-                  <ScrambleValue target={stat.value} />
-                  {stat.value === "2007" && (
-                    <span className="ml-1 text-[#f3b567]">.</span>
-                  )}
-                </div>
-                <p className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-white/55">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-[10px] text-white/45">
-            *B-BBEE status to be confirmed against current company documentation.
-          </p>
         </div>
 
         <div className="absolute bottom-0 right-0 hidden h-2 w-1/3 bg-[#d9773a] lg:block" />

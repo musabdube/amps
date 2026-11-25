@@ -1,18 +1,26 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { projects } from "@/lib/projects";
-
-export const metadata: Metadata = {
-  title: "Projects | AMPS",
-  description:
-    "Explore AMPS project experience across office, residential, education, healthcare, retail, public sector and infrastructure developments.",
-};
+import { useState } from "react";
 
 export default function ProjectsPage() {
+  const [selectedSector, setSelectedSector] = useState("All");
+
+  // Extract unique sectors from projects
+  const sectors = ["All", ...Array.from(new Set(projects.map((p) => p.sector || "Commercial")))];
+  
+  // Filter projects by selected sector
+  const filteredProjects =
+    selectedSector === "All"
+      ? projects
+      : projects.filter((project) => (project.sector || "Commercial") === selectedSector);
+
   return (
     <main className="min-h-screen bg-[#f8f8f6] text-[#20272D]">
       <Header overlay />
@@ -69,64 +77,56 @@ export default function ProjectsPage() {
         <div className="absolute bottom-0 right-0 hidden h-28 w-1/3 bg-[#d9773a] md:block" />
       </section>
 
-      <section id="portfolio" className="mx-auto max-w-[1280px] px-6 py-24 lg:px-12">
-        <div className="mb-14 max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#F28C28]">
-            Our Portfolio
+      <section id="portfolio" className="mx-auto max-w-[1440px] px-6 py-24 lg:px-12">
+        <div className="mb-12">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#d9773a]">
+            Filter by Sector
           </span>
-          <h2 className="mt-5 text-4xl font-extrabold leading-tight text-[#18344A] md:text-5xl">
-            Construction expertise in every
-            <span className="text-[#F28C28]"> project category.</span>
-          </h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {sectors.map((sector) => (
+              <button
+                key={sector}
+                onClick={() => setSelectedSector(sector)}
+                className={`inline-flex items-center rounded-full px-6 py-2.5 text-sm font-semibold transition ${
+                  selectedSector === sector
+                    ? "bg-[#102237] text-white"
+                    : "border border-[#d9c9ba] bg-white text-[#102237] hover:border-[#d9773a] hover:text-[#d9773a]"
+                }`}
+              >
+                {sector}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <article
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filteredProjects.map((project) => (
+            <Link
               key={project.slug}
-              className="group overflow-hidden rounded-[28px] border border-[#e5e7eb] bg-white shadow-[0_18px_45px_rgba(24,52,74,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(24,52,74,0.12)]"
+              href={`/projects/${project.slug}`}
+              className="group relative overflow-hidden rounded-2xl"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-96 w-full overflow-hidden bg-[#e8ddd2]">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   unoptimized
-                  className="object-cover transition duration-700 group-hover:scale-105"
+                  className="object-cover transition duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#102638]/80 via-[#102638]/15 to-transparent" />
-              </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              <div className="p-7">
-                <div className="mb-5 flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#F28C28]">
-                    Sector
+                {/* Info overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#d9773a]">
+                    {project.sector || "Commercial"}
                   </span>
-                  <ArrowUpRight size={18} className="text-[#18344A] transition group-hover:text-[#F28C28]" />
+                  <h3 className="mt-2 text-2xl font-bold leading-tight">{project.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/90">{project.shortDescription}</p>
                 </div>
-
-                <h3 className="text-2xl font-extrabold text-[#18344A]">{project.title}</h3>
-                <p className="mt-4 text-base leading-7 text-[#4b5563]">{project.shortDescription}</p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.services.slice(0, 3).map((service) => (
-                    <span
-                      key={service}
-                      className="rounded-full border border-[#18344A]/10 bg-[#F8F8F6] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#18344A]/70"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
-
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#18344A] transition hover:text-[#F28C28]"
-                >
-                  View Project <ArrowRight size={14} />
-                </Link>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

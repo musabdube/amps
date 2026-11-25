@@ -79,18 +79,18 @@ export default function Header({ className = "", overlay = false }: HeaderProps)
                 key={item.label}
                 href={item.href}
                 className={[
-                  "group relative inline-flex h-12 w-12 items-center justify-center overflow-visible rounded-full border border-transparent transition-all duration-300",
+                  "group relative inline-flex h-14 w-14 items-center justify-center overflow-visible rounded-full border-2 transition-all duration-300",
                   overlay
                     ? isActive
-                      ? "bg-white/10 text-white"
-                      : "text-white/80 hover:border-white/30 hover:bg-white/5 hover:text-[#F28C28]"
+                      ? "border-white bg-white/20 text-white"
+                      : "border-white/40 text-white hover:border-[#F28C28] hover:bg-white/10 hover:text-[#F28C28]"
                     : isActive
-                      ? "bg-[#111827]/5 text-[#111827]"
-                      : "text-[#111827]/80 hover:border-[#111827]/10 hover:bg-[#111827]/5 hover:text-[#F28C28]",
+                      ? "border-[#111827] bg-[#111827]/10 text-[#111827]"
+                      : "border-[#111827]/30 text-[#111827] hover:border-[#F28C28] hover:bg-[#111827]/5 hover:text-[#F28C28]",
                 ].join(" ")}
               >
                 <span className="relative flex items-center justify-center">
-                  <Icon size={18} className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  <Icon size={24} className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5" />
                   <span
                     className={[
                       "pointer-events-none absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.18em] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100",
