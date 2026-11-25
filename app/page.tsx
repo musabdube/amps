@@ -203,12 +203,57 @@ const fadeUp = {
 
 const navigation = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Our Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ];
+
+function ScrambleValue({ target }: { target: string }) {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+";
+  const [value, setValue] = useState(target);
+
+  useEffect(() => {
+    const width = target.length;
+    let frame = 0;
+    const duration = 3200;
+    const interval = 45;
+    const totalFrames = duration / interval;
+
+    const timer = window.setInterval(() => {
+      frame += 1;
+
+      if (frame >= totalFrames) {
+        setValue(target);
+        window.clearInterval(timer);
+        return;
+      }
+
+      const progress = frame / totalFrames;
+      const revealCount = Math.max(1, Math.floor(progress * width));
+
+      const next = Array.from({ length: width }, (_, index) => {
+        if (index < revealCount) {
+          return target[index] ?? " ";
+        }
+
+        return charset[Math.floor(Math.random() * charset.length)];
+      }).join("");
+
+      setValue(next);
+    }, interval);
+
+    return () => window.clearInterval(timer);
+  }, [target]);
+
+  return (
+    <span
+      className="inline-block text-left font-mono tracking-[0.08em] text-white tabular-nums"
+      style={{ minWidth: `${Math.max(target.length, 4)}ch` }}
+    >
+      {value}
+    </span>
+  );
+}
 
 export default function Home() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
@@ -218,28 +263,26 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="overflow-hidden bg-white text-[#20272D]">
-      <Header />
+    <main className="overflow-hidden bg-[#fffdf9] text-[#2d241f]">
+      <Header overlay />
 
       {/* HERO SECTION */}
-      <section className="relative flex min-h-[720px] items-center bg-[#18344A] lg:min-h-[850px]">
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
 
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2200&q=90"
+            src="/images/hero.png"
             alt="Modern commercial architectural development"
             fill
             priority
-            unoptimized
-            className="object-cover"
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
           />
-          <div className="absolute inset-0 bg-[#102638]/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/85 to-transparent" />
         </div>
 
-        <div className="absolute right-0 top-0 h-full w-[18%] border-l border-white/10 bg-white/[0.02] hidden lg:block" />
+        <div className="absolute right-0 top-0 hidden h-full w-[18%] border-l border-white/10 bg-white/[0.03] lg:block" />
 
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-16 pt-40 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-40 lg:px-12">
 
           <motion.div
             initial="hidden"
@@ -247,46 +290,25 @@ export default function Home() {
             variants={fadeUp}
             className="max-w-4xl"
           >
-            <div className="mb-8 flex items-center gap-4">
-              <span className="h-[2px] w-12 bg-[#F28C28]" />
-              <span className="text-xs font-bold tracking-[0.25em] text-[#F9C74F]">
+            <div className="mb-6 flex items-center gap-4 sm:mb-8">
+              <span className="h-[2px] w-12 bg-[#d9773a]" />
+              <span className="text-[10px] font-bold tracking-[0.18em] text-[#f2c57a] sm:text-xs sm:tracking-[0.25em]">
                 QUANTITY SURVEYORS & COST CONSULTANTS
               </span>
             </div>
 
-            <h1 className="max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-[82px]">
-              Building Value
+            <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[82px]">
+              Smart Cost
               <br />
-              Through{" "}
-              <span className="text-[#F28C28]">Expertise.</span>
+              <span className="text-[#f3b567]">Management.</span>
             </h1>
 
-            <p className="mt-8 max-w-xl text-base leading-8 text-white/75 md:text-lg">
-              Independent quantity surveying and construction cost consultancy.
-              Delivering professional insight, innovative solutions and value
-              across every stage of your project.
+            <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-white/80 sm:mt-8 sm:text-lg sm:leading-8 md:text-2xl">
+              Expertise. Integrity. Value.
             </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/services"
-                className="group flex items-center justify-center gap-5 bg-[#F28C28] px-8 py-5 text-xs font-bold tracking-widest text-white transition hover:bg-white hover:text-[#18344A]"
-              >
-                EXPLORE OUR SERVICES
-                <ArrowRight size={17} className="transition group-hover:translate-x-1" />
-              </Link>
-
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-4 border border-white/50 px-8 py-5 text-xs font-bold tracking-widest text-white transition hover:border-[#F28C28] hover:text-[#F28C28]"
-              >
-                CONTACT OUR TEAM
-                <ArrowUpRight size={16} />
-              </Link>
-            </div>
           </motion.div>
 
-          <div className="mt-24 grid max-w-3xl grid-cols-1 gap-8 border-t border-white/20 pt-8 sm:grid-cols-3">
+          <div className="mt-14 grid max-w-3xl grid-cols-1 gap-8 border-t border-white/20 pt-8 sm:mt-24 sm:grid-cols-3">
             {[
               { value: "2007", label: "Established" },
               { value: "86+", label: "Combined years of leadership experience" },
@@ -294,9 +316,9 @@ export default function Home() {
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="text-3xl font-extrabold text-white">
-                  {stat.value}
+                  <ScrambleValue target={stat.value} />
                   {stat.value === "2007" && (
-                    <span className="ml-1 text-[#F28C28]">.</span>
+                    <span className="ml-1 text-[#f3b567]">.</span>
                   )}
                 </div>
                 <p className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-white/55">
@@ -310,436 +332,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="absolute bottom-0 right-0 hidden h-2 w-1/3 bg-[#F28C28] lg:block" />
-      </section>
-
-      {/* INTRODUCTION */}
-      <section className="px-6 py-24 lg:px-12 lg:py-32">
-        <div className="mx-auto grid max-w-[1280px] items-center gap-16 lg:grid-cols-2">
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="relative"
-          >
-            <div className="relative h-[440px] overflow-hidden md:h-[560px]">
-              <Image
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=85"
-                alt="Architectural construction plans and design"
-                fill
-                unoptimized
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-7 -right-3 bg-[#F28C28] p-8 text-white md:-right-7 md:p-10">
-              <div className="text-4xl font-extrabold">AMPS</div>
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em]">
-                Professional Excellence
-              </p>
-            </div>
-            <div className="absolute -left-3 -top-3 h-20 w-20 border-l-4 border-t-4 border-[#F28C28]" />
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <span className="h-[2px] w-10 bg-[#F28C28]" />
-              <span className="text-xs font-bold tracking-[0.2em] text-[#F28C28]">
-                WHO WE ARE
-              </span>
-            </div>
-
-            <h2 className="text-4xl font-extrabold leading-tight text-[#18344A] md:text-5xl">
-              Independent Expertise.
-              <br />
-              <span className="text-[#F28C28]">Professional Excellence.</span>
-            </h2>
-
-            <p className="mt-7 text-base leading-8 text-gray-600">
-              AMPS is an independent professional Quantity Surveying and
-              Construction Cost Consultancy Practice based in Cape Town,
-              South Africa.
-            </p>
-
-            <p className="mt-5 text-base leading-8 text-gray-600">
-              We provide specialised commercial cost advice and management
-              services, combining industry knowledge, individual attention
-              and professional expertise to meet the unique requirements of
-              every client.
-            </p>
-
-            <div className="mt-8 space-y-4">
-              {[
-                "Professional quantity surveying expertise",
-                "Client-focused cost consultancy",
-                "Innovative and value-driven solutions",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="shrink-0 text-[#F28C28]" size={19} />
-                  <span className="text-sm font-medium text-[#18344A]">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/about"
-              className="mt-10 inline-flex items-center gap-4 border-b-2 border-[#F28C28] pb-3 text-xs font-bold tracking-widest text-[#18344A] transition hover:gap-6"
-            >
-              MORE ABOUT AMPS
-              <ArrowUpRight size={17} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* AFFILIATIONS */}
-      <section className="bg-[#F3F1EE] px-6 py-20 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="mb-10 flex items-center justify-center gap-3">
-            <span className="h-[2px] w-10 bg-[#F28C28]" />
-            <span className="text-center text-xs font-extrabold tracking-[0.3em] text-[#F28C28] uppercase">
-              Affiliations
-            </span>
-            <span className="h-[2px] w-10 bg-[#F28C28]" />
-          </div>
-
-          <div className="overflow-hidden rounded-[32px] border border-[#18344A]/10 bg-white/70 p-4 shadow-[0_18px_55px_rgba(24,52,74,0.08)] backdrop-blur-sm md:p-6">
-            <div className="affiliation-track flex items-center gap-5 md:gap-7">
-              {[...affiliations, ...affiliations].map((affiliation, index) => (
-                <div
-                  key={`${affiliation.name}-${index}`}
-                  className="flex min-h-[120px] min-w-[180px] items-center justify-center p-2 md:min-w-[220px]"
-                >
-                  <Image
-                    src={affiliation.image}
-                    alt={affiliation.name}
-                    width={200}
-                    height={80}
-                    unoptimized
-                    className="max-h-[72px] w-auto object-contain opacity-100"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="bg-[#F8F8F6] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="mx-auto max-w-[1280px]">
-
-          <div className="mb-16 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-            <div>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="h-[2px] w-10 bg-[#F28C28]" />
-                <span className="text-xs font-bold tracking-[0.2em] text-[#F28C28]">
-                  WHAT WE DO
-                </span>
-              </div>
-              <h2 className="max-w-2xl text-4xl font-extrabold leading-tight text-[#18344A] md:text-5xl">
-                Our Professional
-                <br />
-                <span className="text-[#F28C28]">Services.</span>
-              </h2>
-            </div>
-
-            <p className="max-w-md text-sm leading-7 text-gray-500">
-              Comprehensive cost consultancy solutions designed to support
-              projects through informed financial management, professional
-              expertise and strategic thinking.
-            </p>
-          </div>
-
-          <div className="grid gap-px bg-gray-200 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.number}
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
-                  className="group flex min-h-[290px] flex-col bg-white p-7 transition duration-300 hover:bg-[#18344A] md:p-8"
-                >
-                  <div className="mb-8 flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#F28C28]">
-                      {service.number}
-                    </span>
-                    <Icon
-                      size={27}
-                      strokeWidth={1.5}
-                      className="text-[#F28C28] transition group-hover:scale-110"
-                    />
-                  </div>
-
-                  <h3 className="text-lg font-bold text-[#18344A] transition group-hover:text-white">
-                    {service.title}
-                  </h3>
-
-                  <p className="mt-4 flex-1 text-sm leading-7 text-gray-500 transition group-hover:text-white/65">
-                    {service.description}
-                  </p>
-
-                  <Link
-                    href="/services"
-                    className="mt-6 flex items-center gap-2 text-[10px] font-bold tracking-widest text-[#F28C28]"
-                  >
-                    LEARN MORE
-                    <ArrowRight size={14} />
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-4 bg-[#18344A] px-8 py-5 text-xs font-bold tracking-widest text-white transition hover:bg-[#F28C28]"
-            >
-              VIEW ALL SERVICES
-              <ArrowUpRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* APPROACH */}
-      <section className="relative overflow-hidden bg-[#18344A] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="absolute -right-32 -top-32 h-[450px] w-[450px] rounded-full border border-white/10" />
-        <div className="absolute -right-20 -top-20 h-[320px] w-[320px] rounded-full border border-white/10" />
-
-        <div className="relative z-10 mx-auto max-w-[1280px]">
-          <div className="max-w-2xl">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="h-[2px] w-10 bg-[#F28C28]" />
-              <span className="text-xs font-bold tracking-[0.2em] text-[#F9C74F]">
-                WHAT DEFINES US
-              </span>
-            </div>
-
-            <h2 className="text-4xl font-extrabold leading-tight text-white md:text-5xl">
-              The Principles Behind
-              <br />
-              <span className="text-[#F28C28]">Our Work.</span>
-            </h2>
-
-            <p className="mt-6 max-w-xl text-sm leading-8 text-white/60">
-              At AMPS, our professional philosophy is built around the
-              principles that guide our relationships, decisions and
-              commitment to delivering value.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-12 md:grid-cols-3">
-            {principles.map((principle) => {
-              const Icon = principle.icon;
-              return (
-                <div
-                  key={principle.number}
-                  className="border-t border-white/20 pt-8"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-[#F28C28]">
-                      {principle.number}
-                    </span>
-                    <Icon size={32} className="text-[#F28C28]" strokeWidth={1.4} />
-                  </div>
-                  <h3 className="mt-8 text-2xl font-bold text-white">
-                    {principle.title}
-                  </h3>
-                  <p className="mt-5 text-sm leading-8 text-white/60">
-                    {principle.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTORS */}
-      <section className="px-6 py-24 lg:px-12 lg:py-32">
-        <div className="mx-auto max-w-[1280px]">
-
-          <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="h-[2px] w-10 bg-[#F28C28]" />
-                <span className="text-xs font-bold tracking-[0.2em] text-[#F28C28]">
-                  OUR EXPERIENCE
-                </span>
-              </div>
-              <h2 className="text-4xl font-extrabold leading-tight text-[#18344A] md:text-5xl">
-                Expertise Across
-                <br />
-                <span className="text-[#F28C28]">Diverse Sectors.</span>
-              </h2>
-            </div>
-
-            <p className="max-w-md text-sm leading-7 text-gray-500">
-              Our leadership team brings experience across a broad range of
-              building and infrastructure environments.
-            </p>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {sectors.map((sector, index) => (
-              <motion.div
-                key={sector.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                className="group relative h-[320px] overflow-hidden bg-[#18344A]"
-              >
-                <Image
-                  src={sector.image}
-                  alt={`${sector.title} sector`}
-                  fill
-                  unoptimized
-                  className="object-cover transition duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#102638] via-[#102638]/30 to-transparent" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-7">
-                  <div className="mb-3 h-[2px] w-10 bg-[#F28C28] transition-all group-hover:w-16" />
-                  <h3 className="text-xl font-bold text-white">
-                    {sector.title}
-                  </h3>
-                  <p className="mt-2 text-xs text-white/65">
-                    {sector.subtitle}
-                  </p>
-                </div>
-
-                <div className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center border border-white/40 text-white opacity-0 transition group-hover:opacity-100">
-                  <ArrowUpRight size={18} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="bg-[#F8F8F6] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="mx-auto max-w-[1280px]">
-
-          <div className="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <div>
-              <div className="mb-6 flex items-center gap-3">
-                <span className="h-[2px] w-10 bg-[#F28C28]" />
-                <span className="text-xs font-bold tracking-[0.2em] text-[#F28C28]">
-                  THE PEOPLE BEHIND AMPS
-                </span>
-              </div>
-
-              <h2 className="text-4xl font-extrabold leading-tight text-[#18344A] md:text-5xl">
-                Experience That
-                <br />
-                <span className="text-[#F28C28]">Makes a Difference.</span>
-              </h2>
-            </div>
-
-            <p className="max-w-md text-sm leading-7 text-gray-500">
-              Our leadership team combines decades of professional experience
-              with a shared commitment to delivering value and building
-              lasting client relationships.
-            </p>
-          </div>
-
-          <div className="grid gap-7 md:grid-cols-3">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group bg-white"
-              >
-                <div className="relative flex h-[250px] items-center justify-center overflow-hidden bg-[#18344A]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#284e66] to-[#102638]" />
-                  <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/30 text-4xl font-bold text-white/80">
-                    {member.initials}
-                  </div>
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#F28C28] transition-all duration-500 group-hover:w-full" />
-                </div>
-
-                <div className="p-8">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#F28C28]">
-                    {member.experience}
-                  </p>
-                  <h3 className="mt-3 text-2xl font-extrabold text-[#18344A]">
-                    {member.name}
-                  </h3>
-                  <p className="mt-2 text-xs font-semibold text-gray-500">
-                    {member.qualification}
-                  </p>
-                  <p className="mt-3 text-xs text-gray-400">
-                    {member.university}
-                  </p>
-                  <p className="mt-6 text-sm leading-7 text-gray-500">
-                    {member.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              href="/team"
-              className="inline-flex items-center gap-3 border-b-2 border-[#F28C28] pb-3 text-xs font-bold tracking-widest text-[#18344A] transition hover:gap-5"
-            >
-              MEET OUR TEAM
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="relative overflow-hidden bg-[#F28C28] px-6 py-24 lg:px-12 lg:py-28">
-        <div className="absolute -right-20 -top-28 h-96 w-96 rounded-full border border-white/20" />
-        <div className="absolute -right-10 -top-20 h-72 w-72 rounded-full border border-white/20" />
-
-        <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col justify-between gap-10 lg:flex-row lg:items-center">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold tracking-[0.25em] text-white/80">
-              LET'S WORK TOGETHER
-            </span>
-
-            <h2 className="mt-6 text-4xl font-extrabold leading-tight text-white md:text-6xl">
-              Have a Project
-              <br />
-              in Mind?
-            </h2>
-
-            <p className="mt-6 max-w-xl text-sm leading-8 text-white/85">
-              Let's discuss how AMPS can support your next development
-              through professional quantity surveying and cost consultancy.
-            </p>
-          </div>
-
-          <Link
-            href="/contact"
-            className="group flex shrink-0 items-center justify-between gap-12 bg-[#18344A] px-8 py-6 text-xs font-bold tracking-widest text-white transition hover:bg-white hover:text-[#18344A]"
-          >
-            GET IN TOUCH
-            <ArrowUpRight size={20} className="transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Link>
-        </div>
+        <div className="absolute bottom-0 right-0 hidden h-2 w-1/3 bg-[#d9773a] lg:block" />
       </section>
 
       {/* FOOTER */}

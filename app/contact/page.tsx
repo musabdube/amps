@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -67,34 +68,36 @@ export default function ContactPage() {
 
   return (
     <main className="overflow-hidden bg-[#F8F8F6] text-[#20272D]">
-      <Header />
+      <Header overlay />
 
-      <section className="relative flex min-h-[540px] items-center bg-[#102638] pt-10">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=85&w=2000')",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/90 to-[#102638]/40" />
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero.png"
+            alt="Contact AMPS team"
+            fill
+            priority
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
+          />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-24 lg:px-12"
+          className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-16 pt-40 lg:px-12"
         >
           <div className="mb-7 flex items-center gap-3">
-            <span className="h-[2px] w-12 bg-[#F28C28]" />
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F28C28]">
+            <span className="h-[2px] w-12 bg-[#d9773a]" />
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f2c57a]">
               Get in Touch
             </span>
           </div>
 
           <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-7xl">
             Let&apos;s start a
-            <span className="block text-[#F28C28]">conversation.</span>
+            <span className="block text-[#f3b567]">conversation.</span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-8 text-white/75 md:text-lg">

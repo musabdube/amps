@@ -89,33 +89,32 @@ const team = [
 export default function TeamPage() {
   return (
     <main className="overflow-hidden bg-white text-[#20272D]">
-      <Header />
+      <Header overlay />
 
-      <section className="relative flex min-h-[560px] items-center bg-[#18344A]">
-        <Image
-          src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=2000&q=90"
-          alt="Professional team working together"
-          fill
-          priority
-          unoptimized
-          className="object-cover"
-        />
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero.png"
+            alt="Professional team working together"
+            fill
+            priority
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
+          />
+        </div>
 
-        <div className="absolute inset-0 bg-[#102638]/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/80 to-transparent" />
-
-        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-12 pt-40 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-16 pt-40 lg:px-12">
           <div className="max-w-3xl">
             <div className="mb-7 flex items-center gap-4">
-              <span className="h-[2px] w-12 bg-[#F28C28]" />
-              <span className="text-xs font-bold tracking-[0.25em] text-[#F9C74F]">
+              <span className="h-[2px] w-12 bg-[#d9773a]" />
+              <span className="text-xs font-bold tracking-[0.25em] text-[#f2c57a]">
                 THE PEOPLE BEHIND AMPS
               </span>
             </div>
 
             <h1 className="text-5xl font-extrabold leading-tight text-white md:text-7xl">
               Our
-              <span className="text-[#F28C28]"> Team.</span>
+              <span className="text-[#f3b567]"> Team.</span>
             </h1>
 
             <p className="mt-8 max-w-xl text-base leading-8 text-white/75">
@@ -128,12 +127,12 @@ export default function TeamPage() {
                 HOME
               </Link>
               <span>/</span>
-              <span className="text-[#F28C28]">OUR TEAM</span>
+              <span className="text-[#f3b567]">OUR TEAM</span>
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-0 right-0 h-2 w-1/3 bg-[#F28C28]" />
+        <div className="absolute bottom-0 right-0 h-2 w-1/3 bg-[#d9773a]" />
       </section>
 
       <section className="px-6 py-24 lg:px-12 lg:py-28">

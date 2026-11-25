@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,24 +23,32 @@ const mainPages = [
 export default function SitemapPage() {
   return (
     <main className="min-h-screen bg-[#f8f8f6] text-[#20272D]">
-      <Header />
+      <Header overlay />
 
-      <section className="relative flex min-h-[480px] items-center bg-[#102638] pt-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(242,140,40,0.18),transparent_42%)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/90 to-[#102638]/60" />
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero.png"
+            alt="AMPS website overview"
+            fill
+            priority
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
+          />
+        </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-24 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-16 pt-40 lg:px-12">
           <div className="max-w-3xl">
             <div className="mb-7 flex items-center gap-3">
-              <span className="h-[2px] w-12 bg-[#F28C28]" />
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F28C28]">
+              <span className="h-[2px] w-12 bg-[#d9773a]" />
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f2c57a]">
                 Site Map
               </span>
             </div>
 
             <h1 className="text-5xl font-extrabold leading-tight text-white md:text-7xl">
               Explore the
-              <span className="block text-[#F28C28]">AMPS website.</span>
+              <span className="block text-[#f3b567]">AMPS website.</span>
             </h1>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/75 md:text-lg">

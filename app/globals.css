@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --amps-orange: #f28c28;
-  --amps-navy: #18344a;
-  --amps-charcoal: #20272d;
-  --amps-yellow: #f9c74f;
-  --amps-offwhite: #f8f8f6;
-  --amps-white: #ffffff;
-  --amps-lightgrey: #e9ecef;
+  --amps-orange: #d9773a;
+  --amps-navy: #2f2a28;
+  --amps-charcoal: #2d241f;
+  --amps-yellow: #f2c57a;
+  --amps-offwhite: #f7f1ea;
+  --amps-white: #fffdf9;
+  --amps-lightgrey: #e8ddd2;
   --background: var(--amps-offwhite);
   --foreground: var(--amps-charcoal);
 }

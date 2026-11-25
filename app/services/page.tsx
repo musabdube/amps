@@ -15,30 +15,32 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="overflow-hidden bg-[#F8F8F6] text-[#20272D]">
-      <Header />
+      <Header overlay />
 
-      <section className="relative flex min-h-[560px] items-center bg-[#102638] pt-24">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=85&w=2000')",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/90 to-[#102638]/40" />
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <Image
+            src="/images/hero.png"
+            alt="Commercial building and construction site"
+            fill
+            priority
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
+          />
+        </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-24 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-16 pt-40 lg:px-12">
           <div className="max-w-3xl">
             <div className="mb-7 flex items-center gap-3">
-              <span className="h-[2px] w-12 bg-[#F28C28]" />
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F28C28]">
+              <span className="h-[2px] w-12 bg-[#d9773a]" />
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f2c57a]">
                 What We Do
               </span>
             </div>
 
             <h1 className="text-5xl font-bold leading-tight text-white md:text-7xl">
               Professional
-              <span className="block text-[#F28C28]">Services.</span>
+              <span className="block text-[#f3b567]">Services.</span>
             </h1>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
@@ -49,13 +51,13 @@ export default function ServicesPage() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="#our-services"
-                className="inline-flex items-center gap-3 bg-[#F28C28] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#dc7416]"
+                className="inline-flex items-center gap-3 bg-[#d9773a] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#fffdf9] hover:text-[#2d241f]"
               >
                 Explore Our Services <ArrowRight size={17} />
               </Link>
               <Link
                 href="/contact"
-                className="border border-white/40 px-7 py-4 text-sm font-semibold text-white transition hover:bg-white hover:text-[#102638]"
+                className="border border-white/40 px-7 py-4 text-sm font-semibold text-white transition hover:border-[#f3b567] hover:text-[#f3b567]"
               >
                 Discuss a Project
               </Link>
@@ -63,7 +65,7 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 right-0 hidden h-28 w-1/3 bg-[#F28C28] md:block" />
+        <div className="absolute bottom-0 right-0 hidden h-28 w-1/3 bg-[#d9773a] md:block" />
       </section>
 
       <section className="mx-auto max-w-[1280px] px-6 py-24 lg:px-12">

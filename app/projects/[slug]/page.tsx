@@ -47,20 +47,26 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="min-h-screen bg-[#f8f8f6] text-[#20272D]">
-      <Header />
+      <Header overlay />
 
-      <section className="relative flex min-h-[540px] items-center bg-[#102638] pt-24">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: `url('${project.image}')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#102638] via-[#102638]/90 to-[#102638]/50" />
+      <section className="relative flex min-h-[100vh] items-center bg-[#2d241f]">
+        <div className="absolute inset-0 h-full w-full overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="h-full w-full scale-[1.03] object-cover object-[center_18%] sm:scale-100 sm:object-center"
+          />
+        </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-24 lg:px-12">
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 pb-16 pt-40 lg:px-12">
           <div className="mb-8 flex items-center gap-3 text-white/80">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#F28C28] hover:text-white"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#f2c57a] hover:text-white"
             >
               <ArrowLeft size={16} />
               Back to Projects
@@ -69,8 +75,8 @@ export default async function ProjectDetailPage({
 
           <div className="max-w-3xl">
             <div className="mb-7 flex items-center gap-3">
-              <span className="h-[2px] w-12 bg-[#F28C28]" />
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F28C28]">
+              <span className="h-[2px] w-12 bg-[#d9773a]" />
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f2c57a]">
                 Project Category
               </span>
             </div>
@@ -85,7 +91,7 @@ export default async function ProjectDetailPage({
           </div>
         </div>
 
-        <div className="absolute bottom-0 right-0 hidden h-28 w-1/3 bg-[#F28C28] md:block" />
+        <div className="absolute bottom-0 right-0 hidden h-28 w-1/3 bg-[#d9773a] md:block" />
       </section>
 
       <section className="mx-auto max-w-[1280px] px-6 py-24 lg:px-12">
