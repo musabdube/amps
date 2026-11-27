@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.amps.co.za"),
+  metadataBase: new URL("https://ampsqs.co.za"),
   title: {
     default: "AMPS | Quantity Surveyors & Cost Consultants",
     template: "%s | AMPS",
@@ -37,24 +37,33 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [{ url: "/images/logo.png", type: "image/png" }],
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
   },
   openGraph: {
     title: "AMPS | Quantity Surveyors & Cost Consultants",
     description:
       "Independent professional quantity surveying and construction cost consultancy support for commercial, residential and public sector projects.",
-    url: "https://www.amps.co.za",
+    url: "https://ampsqs.co.za",
     siteName: "AMPS",
     locale: "en_ZA",
     type: "website",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 512,
+        height: 512,
+        alt: "AMPS logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AMPS | Quantity Surveyors & Cost Consultants",
     description:
       "Independent professional quantity surveying and construction cost consultancy support in Cape Town, South Africa.",
+    images: ["/images/logo.png"],
   },
 };
 

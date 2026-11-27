@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.amps.co.za/sitemap.xml",
-    host: "https://www.amps.co.za",
+    sitemap: "https://ampsqs.co.za/sitemap.xml",
+    host: "https://ampsqs.co.za",
   };
 }

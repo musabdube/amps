@@ -9,7 +9,7 @@ export default function LoadingScreen() {
           <Link href="/" className="inline-flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-md bg-white ring-1 ring-[#18344A]/10">
               <Image
-                src="/logo.svg"
+                src="/images/logo.png"
                 alt="AMPS logo"
                 width={48}
                 height={48}
@@ -36,7 +36,7 @@ export default function LoadingScreen() {
               <div className="absolute inset-0 rounded-full border-4 border-[#F28C28]/20 border-t-[#F28C28] animate-spin" />
               <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-[#18344A]/5 ring-1 ring-[#18344A]/10">
                 <Image
-                  src="/logo.svg"
+                  src="/images/logo.png"
                   alt="AMPS logo"
                   width={64}
                   height={64}
